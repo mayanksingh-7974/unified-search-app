@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnowFlow AI — Smart Knowledge Retrieval</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<canvas id="bg"></canvas>
+  
+  <!-- 🔥 ADVANCED AI BACKGROUND -->
+  <!--  -->
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="logo-dot"></span>
+      KnowFlow<span class="accent">AI</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#chat">Try It</a>
+      <a href="#docs">Docs</a>
+      <!-- <button class="btn-nav" onclick="showSection('chat')">Launch App</button> -->
+       <button onclick="showSection('chat'); return false;">
+  Try the Demo
+</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    
+    <div class="hero-content">
+      <!-- <div class="hero-badge">PS ID: EC604 · TripleIT Titans · IIIT Una</div> -->
+      <h1>Find the right<br /><span class="gradient-text">knowledge</span>,<br />instantly.</h1>
+      
+<div class="hero-content">
+
+  
+
+  <!-- 🔥 CUBE YAHAN ADD KARO
+  <div class="ai-3d-container">
+    <div class="cube">
+      <div class="face front">Drive</div>
+      <div class="face back">Slack</div>
+      <div class="face right">Notion</div>
+      <div class="face left">AI</div>
+      <div class="face top">Data</div>
+      <div class="face bottom">Answer</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <button class="btn-primary">Try the Demo</button>
+  </div>
+
+</div> -->
+      <!--  -->
+      <p class="hero-sub">KnowFlow AI unifies your organization's scattered knowledge across Drive, Slack, Notion & SharePoint — answering questions in natural language, instantly.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showSection('chat')">Try the Demo</button>
+        <button class="btn-ghost" onclick="showSection('upload')">Upload Documents</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span>2+ hrs</span><label>saved daily per employee</label></div>
+        <div class="stat"><span>30%+</span><label>productivity boost</label></div>
+        <div class="stat"><span>40%</span><label>faster onboarding</label></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP -->
+  <main class="app-container" id="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Navigation</h3>
+        <ul class="sidebar-nav">
+          <li class="active" onclick="showSection('chat')"><span>💬</span> Chat</li>
+          <li onclick="showSection('upload')"><span>📁</span> Upload Docs</li>
+          <li onclick="showSection('sources')"><span>🔗</span> Sources</li>
+          <li onclick="showSection('analytics')"><span>📊</span> Analytics</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Connected Sources</h3>
+        <div class="source-item connected">
+          <span class="source-icon">🟢</span> Google Drive
+        </div>
+        <div class="source-item connected">
+          <span class="source-icon">🟢</span> Slack
+        </div>
+        <div class="source-item">
+          <span class="source-icon">⚪</span> Notion
+          <button class="connect-btn" onclick="connectSource('Notion')">Connect</button>
+        </div>
+        <div class="source-item">
+          <span class="source-icon">⚪</span> SharePoint
+          <button class="connect-btn" onclick="connectSource('SharePoint')">Connect</button>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Recent Searches</h3>
+        <div class="recent-item" onclick="fillQuery('What is our refund policy?')">What is our refund policy?</div>
+        <div class="recent-item" onclick="fillQuery('API rate limits for v2')">API rate limits for v2</div>
+        <div class="recent-item" onclick="fillQuery('Q3 revenue report summary')">Q3 revenue report summary</div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-panel">
+
+      <!-- CHAT SECTION -->
+      <section class="panel" id="section-chat">
+        <div class="panel-header">
+          <h2>Knowledge Chat</h2>
+          <div class="model-badge">RAG · GPT-4 · Pinecone</div>
+        </div>
+
+        <div class="chat-window" id="chatWindow">
+          <div class="chat-msg bot">
+            <div class="avatar">🤖</div>
+            <div class="bubble">
+              <p>Hello! I'm KnowFlow AI. I can search across all your connected knowledge sources — Google Drive, Slack, Notion, and more. Ask me anything!</p>
+              <div class="try-prompts">
+                <span onclick="fillQuery('What is our API rate limit?')">What is our API rate limit?</span>
+                <span onclick="fillQuery('Summarize the Q3 report')">Summarize the Q3 report</span>
+                <span onclick="fillQuery('How do I onboard a new engineer?')">How do I onboard a new engineer?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-bar">
+          <input id="queryInput" type="text" placeholder="Ask anything across your knowledge base..." onkeydown="if(event.key==='Enter') sendQuery()" />
+          <button class="send-btn" onclick="sendQuery()">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- UPLOAD SECTION -->
+      <section class="panel hidden" id="section-upload">
+        <div class="panel-header">
+          <h2>Upload Documents</h2>
+          <div class="model-badge">Auto-indexed · Vector DB</div>
+        </div>
+
+        <div class="upload-area" id="dropZone"
+          ondragover="event.preventDefault(); this.classList.add('dragging')"
+          ondragleave="this.classList.remove('dragging')"
+          ondrop="handleDrop(event)">
+          <div class="upload-icon">📄</div>
+          <p>Drag & drop files here, or <label for="fileInput" class="file-link">browse</label></p>
+          <p class="upload-hint">Supports PDF, DOCX, TXT, MD, CSV</p>
+          <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.md,.csv" onchange="handleFiles(this.files)" style="display:none" />
+        </div>
+
+        <div class="uploaded-list" id="uploadedList"></div>
+
+        <div class="upload-status" id="uploadStatus"></div>
+      </section>
+
+      <!-- SOURCES SECTION -->
+      <section class="panel hidden" id="section-sources">
+        <div class="panel-header">
+          <h2>Knowledge Sources</h2>
+        </div>
+        <div class="sources-grid">
+          <div class="source-card connected-card">
+            <div class="source-card-icon">🗂️</div>
+            <h3>Google Drive</h3>
+            <p>47 documents indexed</p>
+            <span class="badge-connected">Connected</span>
+          </div>
+          <div class="source-card connected-card">
+            <div class="source-card-icon">💬</div>
+            <h3>Slack</h3>
+            <p>12 channels synced</p>
+            <span class="badge-connected">Connected</span>
+          </div>
+          <div class="source-card">
+            <div class="source-card-icon">📝</div>
+            <h3>Notion</h3>
+            <p>Not connected</p>
+            <button class="btn-primary small" onclick="connectSource('Notion')">Connect</button>
+          </div>
+          <div class="source-card">
+            <div class="source-card-icon">🏢</div>
+            <h3>SharePoint</h3>
+            <p>Not connected</p>
+            <button class="btn-primary small" onclick="connectSource('SharePoint')">Connect</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS SECTION -->
+      <section class="panel hidden" id="section-analytics">
+        <div class="panel-header">
+          <h2>Analytics Dashboard</h2>
+        </div>
+        <div class="analytics-grid">
+          <div class="metric-card">
+            <div class="metric-num" id="totalQueries">0</div>
+            <div class="metric-label">Total Queries</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">47</div>
+            <div class="metric-label">Docs Indexed</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">2.1h</div>
+            <div class="metric-label">Time Saved Today</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">94%</div>
+            <div class="metric-label">Answer Accuracy</div>
+          </div>
+        </div>
+        <div class="analytics-chart">
+          <h3>Query Volume (Last 7 Days)</h3>
+          <canvas id="queryChart" width="600" height="200"></canvas>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FEATURES SECTION -->
+  <section class="features" id="features">
+    <div class="features-header">
+      <h2>Built for modern teams</h2>
+      <p>Everything your organization needs to stop losing time to knowledge search</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Unified Search</h3>
+        <p>One query instantly searches all connected platforms — no more tab-switching or asking colleagues.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Context-Aware AI</h3>
+        <p>Understands your role, project context, and intent to surface the most relevant results.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📎</div>
+        <h3>Source Citations</h3>
+        <p>Every answer includes references so you can verify and explore the original documents.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Chat Bot Integration</h3>
+        <p>Slack and WhatsApp bots bring knowledge to where your team already works.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Natural Language</h3>
+        <p>Ask questions like you'd ask a colleague — no complex syntax or boolean operators needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Instant Results</h3>
+        <p>RAG pipeline delivers accurate, grounded answers in seconds, not hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <!-- <footer class="footer">
+    <p>KnowFlow AI · TripleIT Titans · IIIT Una · PS ID: EC604</p>
+    <p class="footer-sub">Built for hackathon. Powered by RAG + GPT-4 + Pinecone.</p>
+  </footer> -->
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+<!--  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnowFlow AI - Ultra UI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #0f2027, #05070d);
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #00d4ff, #7c3aed);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00d4ff; }
+      to { text-shadow: 0 0 30px #7c3aed; }
+    }
+
+    p {
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(90deg, #00d4ff, #7c3aed);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00d4ff;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="content">
+  <h1>KnowFlow AI</h1>
+  <p>Smart Knowledge Retrieval System</p>
+  <button>Get Started</button>
+</div>
+
+<script>
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 2;
+    this.vy = (Math.random() - 0.5) * 2;
+    this.size = Math.random() * 2 + 1;
+  }
+
+  move() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = "#00d4ff";
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) {
+  particles.push(new Particle());
+}
+
+function connect() {
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a; b < particles.length; b++) {
+      let dx = particles[a].x - particles[b].x;
+      let dy = particles[a].y - particles[b].y;
+      let dist = dx * dx + dy * dy;
+
+      if (dist < 10000) {
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(0,212,255,0.1)";
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.move();
+    p.draw();
+  });
+
+  connect();
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
+
+
+<!--  -->
+
+<!--  -->
+  <canvas id="bg"></canvas>
+
+<div class="bg-animation">  
+  <div class="cube c1"></div>
+  <div class="cube c2"></div>
+  <div class="cube c3"></div>
+</div>
+  <div class="cube c1">
+  <div class="face front"></div>
+  <div class="face back"></div>
+  <div class="face right"></div>
+  <div class="face left"></div>
+  <div class="face top"></div>
+  <div class="face bottom"></div>
+  </div>
+   <div class="cube c2">
+  <div class="face front"></div>
+  <div class="face back"></div>
+  <div class="face right"></div>
+  <div class="face left"></div>
+  <div class="face top"></div>
+  <div class="face bottom"></div>
+  </div>
+   <div class="cube c3">
+  <div class="face front"></div>
+  <div class="face back"></div>
+  <div class="face right"></div>
+  <div class="face left"></div>
+  <div class="face top"></div>
+  <div class="face bottom"></div>
+</div>
+<!--  -->
