@@ -1,3 +1,41 @@
+# Environment variables (NEVER COMMIT THESE!)
 .env
 .env.local
+.env.*.local
+
+# Node modules
 node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Logs
+logs/
+*.log
+lerna-debug.log
+
+# Build files
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Git
+.git/
