@@ -118,7 +118,7 @@ MIT License - see [LICENSE](./LICENSE) file
 ## 💬 Support
 
 
-- **Email**: singhmani40922email@example.com
+- **Email**: singhmani40922@gmail.com
 - **GitHub**: https://github.com/mayanksingh-7974
 
 ---
